@@ -11,7 +11,7 @@
 此文为小白不友好教程, 请尽量利用搜索引擎解决问题.  
 **如有提出 Issues 的必要, 请尽量提供报错截图, 错误情况, 以及尝试过的解决方案.**
 
-提问前必看: [提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)
+提问前推荐阅读: [提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)
 
 ## 准备工作
 
@@ -23,8 +23,11 @@
 2. 在仓库中新建文件 `.github/workflows/signin.yml`
    > 用于配置 Github Action 的工作流
 
-*自动更新指的是自动使用主仓库最新发行版本代码运行, 但无法修改 action 配置文件. 涉及更新传入参数等配置的更新,
-仍需手动操作 (如 [v1.3.4](https://github.com/ImYrS/aliyun-auto-signin/releases/tag/v1.3.4) 更新).  
+## 关于自动更新
+
+自动更新指的是自动使用主仓库最新发行版本代码运行, 但无法修改 action 配置文件.
+涉及更新传入参数等配置的更新, 仍需手动操作 (如 [v1.3.4](https://github.com/ImYrS/aliyun-auto-signin/releases/tag/v1.3.4) 更新).
+
 如未及时更新 action 配置, 不会影响已存在的功能, 但可能会导致新功能无法使用.
 
 ## 编写 Action 配置
