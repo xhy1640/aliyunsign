@@ -13,9 +13,9 @@ import json
 
 from configobj import ConfigObj
 import requests
-import github
 
 from modules import dingtalk, serverchan, pushdeer, telegram, pushplus, smtp
+import github
 
 
 class SignIn:
@@ -320,7 +320,12 @@ def main():
     if not by_action:
         config['refresh_tokens'] = ','.join(new_users)
     else:
-        github.update_secret('REFRESH_TOKENS', ','.join(new_users))
+        try:
+            github.update_secret('REFRESH_TOKENS', ','.join(new_users))
+        except Exception as e:
+            err = f'Action 更新 Github Secrets 失败: {e}'
+            logging.error(err)
+            push(config, err, err, '阿里云盘签到')
 
 
 if __name__ == '__main__':
