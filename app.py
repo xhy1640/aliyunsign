@@ -59,7 +59,7 @@ class SignIn:
         """
         获取 access_token
 
-        :return: 更新成功返回字典, 失败返回 False
+        :return: 是否成功
         """
         data = requests.post(
             'https://auth.aliyundrive.com/v2/account/token',
