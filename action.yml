@@ -72,6 +72,11 @@ inputs:
     required: false
     default: ''
 
+  FEISHU_WEBHOOK:
+    description: 'Feishu webhook'
+    required: false
+    default: ''
+
 runs:
   using: composite
   steps:
@@ -114,6 +119,7 @@ runs:
         SMTP_PASSWORD: ${{ inputs.SMTP_PASSWORD }}
         SMTP_SENDER: ${{ inputs.SMTP_SENDER }}
         SMTP_RECEIVER: ${{ inputs.SMTP_RECEIVER }}
+        FEISHU_WEBHOOK: ${{ inputs.FEISHU_WEBHOOK }}
 
 branding:
     icon: 'check-circle'

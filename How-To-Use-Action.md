@@ -62,6 +62,7 @@
               SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
               SMTP_SENDER: ${{ secrets.SMTP_SENDER }}
               SMTP_RECEIVER: ${{ secrets.SMTP_RECEIVER }}
+              FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
     ```
 
 2. 按需填写上方配置中的 PUSH_TYPES 参数, 以启用推送功能. 使用 `telegram` 和 `smtp` 渠道在 Action 中可能获得更好体验.
@@ -94,6 +95,7 @@
 - `SMTP_PASSWORD` [可选] *SMTP 服务器密码*
 - `SMTP_SENDER` [可选] *SMTP 发件人邮箱*
 - `SMTP_RECEIVER` [可选] *SMTP 收件人邮箱*
+- `FEISHU_WEBHOOK` [可选] *飞书 Webhook 地址*
 
 > 这些 `Secrets` 将加密存储在 GitHub, 无法被直接读取, 但可以在 Action 中使用
 

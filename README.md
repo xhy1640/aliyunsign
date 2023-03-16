@@ -72,16 +72,21 @@
 >
 > 不支持 `PushDeer` 的原因是好像没人用, 我懒得写, 有需要可以提出 Issue 或者自己写然后 PR (这很简单)
 
-| 渠道         | 本地  | Action |
-|------------|:---:|:------:|
-| DingTalk   |  ✅  |   ❌    |
-| ServerChan |  ✅  |   ✅    |
-| PushDeer   |  ✅  |   ❌    |
-| Telegram   |  ✅  |   ✅    |
-| PushPlus   |  ✅  |   ✅    |
-| SMTP       |  ✅  |   ✅    |
+| 渠道名        | 渠道描述         | 本地  | Action |
+|------------|--------------|:---:|:------:|
+| DingTalk   | 钉钉自定义机器人     |  ✅  |   ❌    |
+| ServerChan | Server 酱推送   |  ✅  |   ✅    |
+| PushDeer   | PushDeer     |  ✅  |   ❌    |
+| Telegram   | Telegram 机器人 |  ✅  |   ✅    |
+| PushPlus   | PlusPlus     |  ✅  |   ✅    |
+| SMTP       | SMTP 邮件      |  ✅  |   ✅    |
+| FeiShu     | 飞书群组机器人      |  ✅  |   ✅    |
 
-> 填写推送渠道名称时不区分大小写, 例如 `dingtalk` 和 `DingTalk` 都是有效的
+**填写推送渠道名称时不区分大小写, 例如 `dingtalk` 和 `DingTalk` 都是有效的**
+
+> 本地部署推荐: 飞书, ServerChan, PushPlus
+>
+> Action 推荐: 飞书, PushPlus, Telegram, ServerChan
 
 - 钉钉机器人
     - `app_key`: 机器人的 `appKey`
@@ -92,7 +97,7 @@
 
 - ServerChan
     - `send_key`: ServerChan 发送消息的鉴权 `key`
-    - [server酱官方文档](https://sct.ftqq.com)
+    - [server 酱官方文档](https://sct.ftqq.com)
 
 - PushDeer (未测试)
     - `endpoint`: 默认为 `https://api2.pushdeer.com`, 自建 PushDeer Server 时才需要更改
@@ -108,7 +113,7 @@
 
 - PushPlus
     - `token`: PushPlus 发送消息的用户令牌 `token`
-    - [PushPlus官方文档](https://www.pushplus.plus)
+    - [PushPlus 官方文档](https://www.pushplus.plus)
 
 - SMTP
     - `smtp_host`: SMTP 服务器地址
@@ -119,6 +124,10 @@
     - `smtp_sender`: 发件人地址, 一般与用户名相同
     - `smtp_receiver`: 收件人地址, 仅支持单个收件人
     - 推荐使用 Microsoft Outlook 作为 SMTP 服务器
+
+- FeiShu
+    - `webhook`: 飞书群组机器人的 `webhook` 地址
+    - [飞书自定义机器人指南](https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN)
 
 - 欢迎 PR 更多推送渠道
 

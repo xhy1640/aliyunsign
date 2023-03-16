@@ -14,7 +14,7 @@ import json
 from configobj import ConfigObj
 import requests
 
-from modules import dingtalk, serverchan, pushdeer, telegram, pushplus, smtp
+from modules import dingtalk, serverchan, pushdeer, telegram, pushplus, smtp, feishu
 import github
 
 
@@ -200,6 +200,7 @@ def push(
         'telegram': telegram,
         'pushplus': pushplus,
         'smtp': smtp,
+        'feishu': feishu,
     }.items():
         if push_type in configured_push_types:
             pusher.push(config, content, content_html, title)
@@ -262,6 +263,7 @@ def get_config_from_env() -> Optional[dict]:
             'smtp_password': environ['SMTP_PASSWORD'],
             'smtp_sender': environ['SMTP_SENDER'],
             'smtp_receiver': environ['SMTP_RECEIVER'],
+            'feishu_webhook': environ['FEISHU_WEBHOOK'],
         }
     except KeyError as e:
         logging.error(f'环境变量 {e} 缺失.')
