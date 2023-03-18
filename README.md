@@ -37,8 +37,8 @@
         ```bash
         pip install -r requirements.txt
        
-       # 国内环境使用清华源可加快安装速度
-         pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+        # 国内环境使用清华源可加快安装速度
+        pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
         ```
 3. 修改配置文件
     1. 复制 `example.config.ini` 为 `config.ini`
