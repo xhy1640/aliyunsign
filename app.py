@@ -86,6 +86,7 @@ class SignIn:
         except KeyError:
             logging.error(f'[{self.hide_refresh_token}] 获取 access token 失败, 参数缺失: {data}')
             self.error = f'获取 access token 失败, 参数缺失: {data}'
+            return False
 
         return True
 
