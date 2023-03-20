@@ -55,19 +55,29 @@ class SignIn:
         except IndexError:
             return self.refresh_token
 
-    def __get_access_token(self) -> bool:
+    def __get_access_token(self, retry: bool = False) -> bool:
         """
         获取 access_token
 
+        :param retry: 是否重试
         :return: 是否成功
         """
-        data = requests.post(
-            'https://auth.aliyundrive.com/v2/account/token',
-            json={
-                'grant_type': 'refresh_token',
-                'refresh_token': self.refresh_token,
-            }
-        ).json()
+        try:
+            data = requests.post(
+                'https://auth.aliyundrive.com/v2/account/token',
+                json={
+                    'grant_type': 'refresh_token',
+                    'refresh_token': self.refresh_token,
+                }
+            ).json()
+        except requests.RequestException as e:
+            logging.error(f'[{self.hide_refresh_token}] 获取 access token 请求失败: {e}')
+            if not retry:
+                logging.info(f'[{self.hide_refresh_token}] 正在重试...')
+                return self.__get_access_token(retry=True)
+
+            self.error = e
+            return False
 
         try:
             if data['code'] in [
@@ -90,19 +100,28 @@ class SignIn:
 
         return True
 
-    def __sign_in(self) -> NoReturn:
+    def __sign_in(self, retry: bool = False) -> NoReturn:
         """
         签到函数
 
         :return:
         """
-        data = requests.post(
-            'https://member.aliyundrive.com/v1/activity/sign_in_list',
-            headers={
-                'Authorization': f'Bearer {self.access_token}',
-            },
-            json={},
-        ).json()
+        try:
+            data = requests.post(
+                'https://member.aliyundrive.com/v1/activity/sign_in_list',
+                headers={
+                    'Authorization': f'Bearer {self.access_token}',
+                },
+                json={},
+            ).json()
+        except requests.RequestException as e:
+            logging.error(f'[{self.phone}] 签到请求失败: {e}')
+            if not retry:
+                logging.info(f'[{self.phone}] 正在重试...')
+                return self.__sign_in(retry=True)
+
+            self.error = e
+            return False
 
         if 'success' not in data:
             logging.error(f'[{self.phone}] 签到失败, 错误信息: {data}')
@@ -137,7 +156,7 @@ class SignIn:
         text = (
             f'[{user}] 签到成功, 本月累计签到 {self.signin_count} 天.\n本次签到{self.signin_reward}'
             if self.signin_count
-            else f'[{user}] 签到失败\n{json.dumps(self.error, indent=2, ensure_ascii=False)}'
+            else f'[{user}] 签到失败\n{json.dumps(str(self.error), indent=2, ensure_ascii=False)}'
         )
 
         text_html = (
@@ -145,7 +164,7 @@ class SignIn:
             if self.signin_count
             else (
                 f'<code>{user}</code> 签到失败\n'
-                f'<code>{json.dumps(self.error, indent=2, ensure_ascii=False)}</code>'
+                f'<code>{json.dumps(str(self.error), indent=2, ensure_ascii=False)}</code>'
             )
         )
 

@@ -26,9 +26,9 @@
 | 多账户       |  ✅   |  -   |
 | Action 签到 |  ✅   |  -   |
 
-## 本地运行使用方法
+## 本地运行
 
-*[GitHub Action 使用方法](https://github.com/ImYrS/aliyun-auto-signin/blob/main/How-To-Use-Action.md)*
+*[GitHub Action 运行](https://github.com/ImYrS/aliyun-auto-signin/blob/main/How-To-Use-Action.md)*
 
 1. Clone 本项目到本地或下载 Release 版本
 2. 环境安装
@@ -55,7 +55,7 @@
 7. 如果遇到配置错误或环境问题, 并且你并不擅长于这个领域, 那推荐的解决方案是切换为 Action 方案而不是提出 Issue 等待解答
    (通常会花费更多的时间).
 
-## 低版本 Python
+### 低版本 Python
 
 ~~注意: main 分支仅支持 Python 3.10 及以上版本, 低于 3.10 的版本请移步
 [低版本兼容分支](https://github.com/ImYrS/aliyun-auto-signin/tree/older-python-version)~~
@@ -63,6 +63,12 @@
 **低版本兼容分支已不再维护, 并可能在未来被移除.
 无法使用 `Python 3.10`
 或更高版本请切换至 [Action](https://github.com/ImYrS/aliyun-auto-signin/blob/main/How-To-Use-Action.md) 方案**
+
+## Docker 运行
+
+**非官方** docker 镜像及讨论[点此查看](https://github.com/ImYrS/aliyun-auto-signin/issues/21)
+
+> 本项目不提供 docker 支持及错误解答
 
 ## 推送渠道
 
