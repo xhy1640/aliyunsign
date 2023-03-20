@@ -84,22 +84,17 @@ runs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-    - id: version
-      uses: pozetroninc/github-action-get-latest-release@master
-      with:
-        repository: ImYrS/aliyun-auto-signin
-        excludes: prerelease, draft
     - name: Download
       shell: bash
       run: |
-        wget https://github.com/ImYrS/aliyun-auto-signin/archive/refs/tags/${{ steps.version.outputs.release }}.zip -O release.zip
-        rm -rf release
-        unzip release.zip -d release
-        rm release.zip
+        wget https://github.com/ImYrS/aliyun-auto-signin/archive/refs/heads/main.zip -O main.zip
+        rm -rf main
+        unzip main.zip -d main
+        rm main.zip
     - name: Run
       shell: bash
       run: |
-        cd release
+        cd main
         cd $(ls -dt */|head -1 )
         pip install -r requirements.txt
         python app.py action
