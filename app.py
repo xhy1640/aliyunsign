@@ -263,17 +263,12 @@ def get_config_from_env() -> Optional[dict]:
     :return: 配置字典, 配置缺失返回 None
     """
     try:
+        refresh_tokens = environ['REFRESH_TOKENS'] or ''
+        push_types = environ['PUSH_TYPES'] or ''
+
         return {
-            'refresh_tokens': (
-                [environ['REFRESH_TOKENS']]
-                if not environ['REFRESH_TOKENS']
-                else environ['REFRESH_TOKENS'].split(',')
-            ),
-            'push_types': (
-                [environ['PUSH_TYPES']]
-                if not environ['PUSH_TYPES']
-                else environ['PUSH_TYPES'].split(',')
-            ),
+            'refresh_tokens': refresh_tokens.split(','),
+            'push_types': push_types.split(','),
             'serverchan_send_key': environ['SERVERCHAN_SEND_KEY'],
             'telegram_endpoint': 'https://api.telegram.org',
             'telegram_bot_token': environ['TELEGRAM_BOT_TOKEN'],
