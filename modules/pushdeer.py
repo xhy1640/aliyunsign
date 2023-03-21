@@ -25,7 +25,7 @@ class Pusher:
         :param content: 消息内容
         :return:
         """
-        return requests.post(
+        request = requests.post(
             self.endpoint + '/message/push',
             json={
                 'pushkey': self.push_key,
@@ -33,7 +33,11 @@ class Pusher:
                 'text': title,
                 'desp': content,
             }
-        ).json()
+        )
+
+        request.raise_for_status()
+
+        return request.json()
 
 
 def push(

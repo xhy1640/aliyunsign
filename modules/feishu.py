@@ -23,7 +23,7 @@ class Pusher:
         :param content: 消息内容
         :return:
         """
-        response = requests.post(
+        request = requests.post(
             self.webhook,
             json={
                 'msg_type': 'post',
@@ -43,9 +43,9 @@ class Pusher:
             }
         )
 
-        response.raise_for_status()
+        request.raise_for_status()
 
-        return response.json()
+        return request.json()
 
 
 def push(

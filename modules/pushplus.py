@@ -19,14 +19,18 @@ class Pusher:
         :param content: 消息内容
         :return:
         """
-        return requests.post(
+        request =  requests.post(
             'http://www.pushplus.plus/send',
             json={
                 'token': self.token,
                 'title': title,
                 'content': content,
             }
-        ).json()
+        )
+
+        request.raise_for_status()
+
+        return request.json()
 
 
 def push(
