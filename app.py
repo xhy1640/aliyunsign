@@ -385,7 +385,7 @@ def main():
         text = '\n\n'.join(rewards)
         text += (
             '\n\n该功能由 阿里云盘自动签到 https://github.com/ImYrS/aliyun-auto-signin 提供.\n'
-            '阿里云盘两周年活动结束后本功能将被移除.\n'
+            '用于尝试自动兑换 500G 福利码, 两周年活动结束后本功能将被移除.\n'
             '如果这个项目帮助到了你, 欢迎给我一个 Star 来支持我持续维护和更新.'
         )
         text_html = text
