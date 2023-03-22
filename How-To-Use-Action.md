@@ -11,6 +11,8 @@
 此文为小白不友好教程, 请尽量利用搜索引擎解决问题.  
 **如有提出 Issues 的必要, 请尽量提供报错截图, 错误情况, 以及尝试过的解决方案.**
 
+> [非官方小白教程](https://www.52pojie.cn/thread-1757911-1-1.html) by [@陈宇轩](https://www.52pojie.cn/home.php?mod=space&uid=440249) on 52pojie.
+
 提问前推荐阅读: [提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)
 
 ## 准备工作
