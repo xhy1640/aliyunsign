@@ -40,8 +40,8 @@
     
     on:
       schedule:
-       # 每天国际时间 17:20 运行一次, 中国时间 01:20
-        - cron: '20 17 * * *'
+       # 每天国际时间 14:40 运行一次, 中国时间 22:40
+        - cron: '40 14 * * *'
       workflow_dispatch:
     jobs:
       signin:
@@ -67,7 +67,9 @@
               FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
     ```
 
-2. 按需填写上方配置中的 PUSH_TYPES 参数, 以启用推送功能. 使用 `telegram` 和 `smtp` 渠道在 Action 中可能获得更好体验.
+2. 按需修改 `corn` 定时运行时间, 推荐在中国时间 22:00 之后.
+
+3. 修改上方配置中的 `PUSH_TYPES` 参数, 以启用推送功能. 使用 `telegram` 和 `smtp` 渠道在 Action 中可能获得更好体验.
    > 由于配置复杂或渠道 IP 限制等原因, 部分渠道不支持在 Github Action 中使用,
    详见项目首页的[推送渠道](https://github.com/ImYrS/aliyun-auto-signin/blob/main/README.md#%E6%8E%A8%E9%80%81%E6%B8%A0%E9%81%93)
 
