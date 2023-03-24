@@ -6,7 +6,6 @@
 """
 
 import logging
-from argparse import Namespace
 from os import environ
 from sys import argv
 from typing import NoReturn, Optional
@@ -324,7 +323,7 @@ def reward_code(token: str, code: str) -> Optional[str]:
         return f'兑换福利码失败: {data["message"]}'
 
 
-def get_args() -> Namespace:
+def get_args() -> argparse.Namespace:
     """
     获取命令行参数
 
@@ -346,14 +345,21 @@ def main():
     """
     environ['NO_PROXY'] = '*'  # 禁止代理
 
-    args = get_args()
+    # 旧版本兼容
+    if 'action' in argv:
+        by_action = True
+        debug = False
+    else:
+        args = get_args()
+        by_action = args.action
+        debug = args.debug
 
-    init_logger(args.debug)  # 初始化日志系统
+    init_logger(debug)  # 初始化日志系统
 
     # 获取配置
     config = (
         get_config_from_env()
-        if args.action
+        if by_action
         else ConfigObj('config.ini', encoding='UTF8')
     )
 
@@ -405,7 +411,7 @@ def main():
     # 更新 refresh token
     new_users = [i['refresh_token'] for i in results]
 
-    if not args.action:
+    if not by_action:
         config['refresh_tokens'] = ','.join(new_users)
     else:
         try:
