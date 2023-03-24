@@ -6,11 +6,12 @@
 """
 
 import logging
+from argparse import Namespace
 from os import environ
 from sys import argv
 from typing import NoReturn, Optional
 import json
-import re
+import argparse
 
 from configobj import ConfigObj
 import requests
@@ -232,7 +233,7 @@ def push(
             pusher.push(config, content, content_html, title)
 
 
-def init_logger() -> NoReturn:
+def init_logger(debug: Optional[bool] = False) -> NoReturn:
     """
     初始化日志系统
 
@@ -246,12 +247,14 @@ def init_logger() -> NoReturn:
 
     # Console
     ch = logging.StreamHandler()
+    log.setLevel(logging.DEBUG if debug else logging.INFO)
     ch.setFormatter(log_format)
     log.addHandler(ch)
 
     # Log file
     log_name = 'aliyun_auto_signin.log'
     fh = logging.FileHandler(log_name, mode='a', encoding='utf-8')
+    log.setLevel(logging.DEBUG if debug else logging.INFO)
     fh.setFormatter(log_format)
     log.addHandler(fh)
 
@@ -323,6 +326,20 @@ def reward_code(token: str, code: str) -> Optional[str]:
         return f'兑换福利码失败: {data["message"]}'
 
 
+def get_args() -> Namespace:
+    """
+    获取命令行参数
+
+    :return: 命令行参数
+    """
+    parser = argparse.ArgumentParser(description='阿里云盘自动签到')
+
+    parser.add_argument('--action', '-a', help='由 GitHub Actions 调用', action='store_true', default=False)
+    parser.add_argument('--debug', '-d', help='调试模式', action='store_true', default=False)
+
+    return parser.parse_args()
+
+
 def main():
     """
     主函数
@@ -331,18 +348,14 @@ def main():
     """
     environ['NO_PROXY'] = '*'  # 禁止代理
 
-    init_logger()  # 初始化日志系统
+    args = get_args()
 
-    by_action = (
-        True
-        if len(argv) == 2 and argv[1] == 'action'
-        else False
-    )
+    init_logger(args.debug)  # 初始化日志系统
 
     # 获取配置
     config = (
         get_config_from_env()
-        if by_action
+        if args.action
         else ConfigObj('config.ini', encoding='UTF8')
     )
 
@@ -394,7 +407,7 @@ def main():
     # 更新 refresh token
     new_users = [i['refresh_token'] for i in results]
 
-    if not by_action:
+    if not args.action:
         config['refresh_tokens'] = ','.join(new_users)
     else:
         try:
