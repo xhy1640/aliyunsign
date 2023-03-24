@@ -97,7 +97,7 @@ runs:
         cd main
         cd $(ls -dt */|head -1 )
         pip install -r requirements.txt
-        python app.py action
+        python app.py -d -a
       env:
         REFRESH_TOKENS: ${{ inputs.REFRESH_TOKENS }}
         GP_TOKEN: ${{ inputs.GP_TOKEN }}
