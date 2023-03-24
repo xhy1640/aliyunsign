@@ -329,10 +329,10 @@ def get_args() -> argparse.Namespace:
 
     :return: 命令行参数
     """
-    parser = argparse.ArgumentParser(description='阿里云盘自动签到')
+    parser = argparse.ArgumentParser(description='阿里云盘自动签到 by @ImYrS')
 
-    parser.add_argument('--action', '-a', help='由 GitHub Actions 调用', action='store_true', default=False)
-    parser.add_argument('--debug', '-d', help='调试模式', action='store_true', default=False)
+    parser.add_argument('-a', '--action', help='由 GitHub Actions 调用', action='store_true', default=False)
+    parser.add_argument('-d', '--debug', help='调试模式, 会输出更多调试数据', action='store_true', default=False)
 
     return parser.parse_args()
 
