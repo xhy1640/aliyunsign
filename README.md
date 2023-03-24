@@ -94,6 +94,9 @@
 >
 > Action 推荐: 飞书, PushPlus, Telegram, ServerChan
 
+<details>
+<summary>各推送渠道完整配置</summary>
+
 - 钉钉机器人
     - `app_key`: 机器人的 `appKey`
     - `app_secret`: 机器人的 `appSecret`
@@ -136,6 +139,8 @@
     - [飞书自定义机器人指南](https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN)
 
 - 欢迎 PR 更多推送渠道
+
+</details>
 
 ## 其他
 

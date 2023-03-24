@@ -30,6 +30,11 @@ class Pusher:
 
         request.raise_for_status()
 
+        data = request.json()
+
+        if data['code'] != 200:
+            raise Exception(f'[{data["code"]}] {data["msg"]}')
+
         return request.json()
 
 
