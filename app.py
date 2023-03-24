@@ -72,7 +72,6 @@ class SignIn:
                     'refresh_token': self.refresh_token,
                 }
             ).json()
-            logging.debug(str(data))
         except requests.RequestException as e:
             logging.error(f'[{self.hide_refresh_token}] 获取 access token 请求失败: {e}')
             if not retry:
@@ -311,7 +310,6 @@ def reward_code(token: str, code: str) -> Optional[str]:
         return '兑换福利码时发生请求错误'
 
     data = request.json()
-    logging.debug(str(data))
 
     if 'success' not in data:
         return f'兑换福利码发生错误: {data["message"]}'
