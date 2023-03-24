@@ -71,6 +71,7 @@ class SignIn:
                     'refresh_token': self.refresh_token,
                 }
             ).json()
+            logging.debug(str(data))
         except requests.RequestException as e:
             logging.error(f'[{self.hide_refresh_token}] 获取 access token 请求失败: {e}')
             if not retry:
@@ -110,11 +111,11 @@ class SignIn:
         try:
             data = requests.post(
                 'https://member.aliyundrive.com/v1/activity/sign_in_list',
-                headers={
-                    'Authorization': f'Bearer {self.access_token}',
-                },
-                json={},
+                params={'_rx-s': 'mobile'},
+                headers={'Authorization': f'Bearer {self.access_token}'},
+                json={'isReward': True},
             ).json()
+            logging.debug(str(data))
         except requests.RequestException as e:
             logging.error(f'[{self.phone}] 签到请求失败: {e}')
             if not retry:
@@ -238,21 +239,19 @@ def init_logger() -> NoReturn:
     :return:
     """
     log = logging.getLogger()
-    log.setLevel(logging.INFO)
+    log.setLevel(logging.DEBUG)
     log_format = logging.Formatter(
         '%(asctime)s - %(filename)s:%(lineno)d - %(levelname)s: %(message)s'
     )
 
     # Console
     ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
     ch.setFormatter(log_format)
     log.addHandler(ch)
 
     # Log file
     log_name = 'aliyun_auto_signin.log'
     fh = logging.FileHandler(log_name, mode='a', encoding='utf-8')
-    fh.setLevel(logging.DEBUG)
     fh.setFormatter(log_format)
     log.addHandler(fh)
 
@@ -304,12 +303,12 @@ def reward_code(token: str, code: str) -> Optional[str]:
             headers={'Authorization': token},
             json={'code': code},
         )
-
     except requests.exceptions.RequestException as e:
         logging.error(f'兑换福利码时发生请求错误: {e}')
         return '兑换福利码时发生请求错误'
 
     data = request.json()
+    logging.debug(str(data))
 
     if 'success' not in data:
         return f'兑换福利码发生错误: {data["message"]}'
