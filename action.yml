@@ -37,6 +37,11 @@ inputs:
     required: false
     default: ''
 
+  PUSHPLUS_TOPIC:
+    description: 'PushPlus topic'
+    required: false
+    default: ''
+
   SMTP_HOST:
     description: 'SMTP host'
     required: false
