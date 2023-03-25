@@ -36,7 +36,7 @@
     2. 安装依赖
         ```bash
         pip install -r requirements.txt
-       
+
         # 国内环境使用清华源可加快安装速度
         pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
         ```
@@ -123,6 +123,7 @@
 
 - PushPlus
     - `token`: PushPlus 发送消息的用户令牌 `token`
+    - `topic`: PushPlus 群组编码，不填仅发送给自己 `topic`
     - [PushPlus 官方文档](https://www.pushplus.plus)
 
 - SMTP

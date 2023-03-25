@@ -276,6 +276,7 @@ def get_config_from_env() -> Optional[dict]:
             'telegram_chat_id': environ['TELEGRAM_CHAT_ID'],
             'telegram_proxy': None,
             'pushplus_token': environ['PUSHPLUS_TOKEN'],
+            'pushplus_topic': environ['PUSHPLUS_TOPIC'],
             'smtp_host': environ['SMTP_HOST'],
             'smtp_port': environ['SMTP_PORT'],
             'smtp_tls': environ['SMTP_TLS'],

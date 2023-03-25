@@ -37,6 +37,11 @@ inputs:
     required: false
     default: ''
 
+  PUSHPLUS_TOPIC:
+    description: 'PushPlus topic'
+    required: false
+    default: ''
+
   SMTP_HOST:
     description: 'SMTP host'
     required: false
@@ -112,6 +117,7 @@ runs:
         TELEGRAM_BOT_TOKEN: ${{ inputs.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ inputs.TELEGRAM_CHAT_ID }}
         PUSHPLUS_TOKEN: ${{ inputs.PUSHPLUS_TOKEN }}
+        PUSHPLUS_TOPIC: ${{ inputs.PUSHPLUS_TOPIC }}
         SMTP_HOST: ${{ inputs.SMTP_HOST }}
         SMTP_PORT: ${{ inputs.SMTP_PORT }}
         SMTP_TLS: ${{ inputs.SMTP_TLS }}
