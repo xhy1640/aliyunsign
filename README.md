@@ -149,3 +149,9 @@
 - 欢迎在 [Issues](https://github.com/ImYrS/aliyun-auto-signin/issues) 中反馈 Bug
 - 你的 Star :star: 是我维护的动力
 - PRs are welcome
+
+## 贡献者
+
+<a href="https://github.com/ImYrS/aliyun-auto-signin/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ImYrS/aliyun-auto-signin"  alt=""/>
+</a>
