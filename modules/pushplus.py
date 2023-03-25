@@ -7,9 +7,11 @@ from configobj import ConfigObj
 class Pusher:
     def __init__(
             self,
-            token: str
+            token: str,
+            topic: str
     ):
         self.token = token
+        self.topic = topic
 
     def send(self, title: str, content: str) -> dict:
         """
@@ -25,6 +27,7 @@ class Pusher:
                 'token': self.token,
                 'title': title,
                 'content': content,
+                'topic': self.topic,
             }
         )
 
@@ -58,7 +61,10 @@ def push(
         return False
 
     try:
-        pusher = Pusher(config['pushplus_token'])
+        pusher = Pusher(
+            config['pushplus_token'],
+            config['pushplus_topic'],
+        )
         pusher.send(title, content)
         logging.info('PushPlus 推送成功')
     except Exception as e:

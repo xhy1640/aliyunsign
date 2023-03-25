@@ -37,7 +37,7 @@
 1. 创建 `.github/workflows/signin.yml` 文件, 写入 Action 配置, 以下是参考配置
     ```yaml
     name: Aliyun Signin
-    
+
     on:
       schedule:
        # 每天国际时间 14:40 运行一次, 中国时间 22:40
@@ -57,6 +57,7 @@
               TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
               TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
               PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+              PUSHPLUS_TOPIC: ${{ secrets.PUSHPLUS_TOPIC }}
               SMTP_HOST: ${{ secrets.SMTP_HOST }}
               SMTP_PORT: ${{ secrets.SMTP_PORT }}
               SMTP_TLS: ${{ secrets.SMTP_TLS }}
@@ -92,6 +93,7 @@
 - `TELEGRAM_BOT_TOKEN` [可选] *Telegram Bot Token*
 - `TELEGRAM_CHAT_ID` [可选] *Telegram 接收推送消息的会话 ID*
 - `PUSHPLUS_TOKEN` [可选] *PushPlus Token*
+- `PUSHPLUS_TOPIC` [可选] *PushPlus 群组编码，不填仅发送给自己*
 - `SMTP_HOST` [可选] *SMTP 服务器地址*
 - `SMTP_PORT` [可选] *SMTP 服务器端口*
 - `SMTP_TLS` [可选] *SMTP 服务器是否使用 TLS*
