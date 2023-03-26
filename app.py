@@ -346,21 +346,14 @@ def main():
     """
     environ['NO_PROXY'] = '*'  # 禁止代理
 
-    # 旧版本兼容
-    if 'action' in argv:
-        by_action = True
-        debug = False
-    else:
-        args = get_args()
-        by_action = args.action
-        debug = args.debug
+    args = get_args()
 
-    init_logger(debug)  # 初始化日志系统
+    init_logger(args.debug)  # 初始化日志系统
 
     # 获取配置
     config = (
         get_config_from_env()
-        if by_action
+        if args.action
         else ConfigObj('config.ini', encoding='UTF8')
     )
 
@@ -411,7 +404,7 @@ def main():
     # 更新 refresh token
     new_users = [i['refresh_token'] for i in results]
 
-    if not by_action:
+    if not args.action:
         config['refresh_tokens'] = ','.join(new_users)
     else:
         try:
