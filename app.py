@@ -387,9 +387,8 @@ def main():
             continue
 
         reward = reward_code(signin.access_token, '阿里云盘两周年')
-        reward = '已经兑换过这个福利码了.' if reward is None else reward
-        reward = f'[{signin.phone}] {reward}'
-        rewards.append(reward)
+        if reward:
+            rewards.append(f'[{signin.phone}] {reward}')
 
     # 合并推送
     text = '\n\n'.join([i['text'] for i in results])
