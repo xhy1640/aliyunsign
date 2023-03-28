@@ -7,7 +7,6 @@
 
 import logging
 from os import environ
-from sys import argv
 from typing import NoReturn, Optional
 import json
 import argparse
@@ -291,39 +290,6 @@ def get_config_from_env() -> Optional[dict]:
         return None
 
 
-def reward_code(token: str, code: str) -> Optional[str]:
-    """
-    兑换福利码
-
-    :param token: access token
-    :param code: 福利码
-    :return: 兑换结果, None 表示福利码已兑换
-    """
-    try:
-        request = requests.post(
-            'https://member.aliyundrive.com/v1/users/rewards',
-            headers={'Authorization': token},
-            json={'code': code},
-        )
-    except requests.exceptions.RequestException as e:
-        logging.error(f'兑换福利码时发生请求错误: {e}')
-        return '兑换福利码时发生请求错误'
-
-    data = request.json()
-
-    if 'success' not in data:
-        return f'兑换福利码发生错误: {data["message"]}'
-
-    if data['success']:
-        return f'兑换福利码成功: {data["result"]["message"]}'
-
-    else:
-        if data['code'] == '30009':
-            return None
-
-        return f'兑换福利码失败: {data["message"]}'
-
-
 def get_args() -> argparse.Namespace:
     """
     获取命令行参数
@@ -375,31 +341,11 @@ def main():
         signin = SignIn(config=config, refresh_token=user)
         results.append(signin.run())
 
-        # 阿里云盘两周年
-        if not signin.access_token:
-            continue
-
-        reward = reward_code(signin.access_token, '阿里云盘两周年')
-        if reward:
-            rewards.append(f'[{signin.phone}] {reward}')
-
     # 合并推送
     text = '\n\n'.join([i['text'] for i in results])
     text_html = '\n\n'.join([i['text_html'] for i in results])
 
     push(config, text, text_html, '阿里云盘签到')
-
-    # 阿里云盘两周年推送
-    if rewards:
-        text = '\n\n'.join(rewards)
-        text += (
-            '\n\n该功能由 阿里云盘自动签到 https://github.com/ImYrS/aliyun-auto-signin 提供.\n'
-            '用于尝试自动兑换 500G 福利码, 两周年活动结束后本功能将被移除.\n'
-            '如果这个项目帮助到了你, 欢迎给我一个 Star 来支持我持续维护和更新.'
-        )
-        text_html = text
-
-        push(config, text, text_html, '阿里云盘两周年')
 
     # 更新 refresh token
     new_users = [i['refresh_token'] for i in results]
